@@ -10,7 +10,8 @@ class RosPublisher(RosSender):
     Class to publish messages to a ROS topic
     """
     # TODO: surrface latch functionality
-    def __init__(self, topic, message_class, queue_size=10):
+
+    def __init__(self, topic, message_class, queue_size=10, **kwargs):
         """
 
         Args:
@@ -19,7 +20,8 @@ class RosPublisher(RosSender):
             queue_size:    Max number of entries to maintain in an outgoing queue
         """
         self.msg = message_class()
-        self.pub = rospy.Publisher(topic, message_class, queue_size=queue_size)
+        self.pub = rospy.Publisher(
+            topic, message_class, queue_size=queue_size, **kwargs)
 
     def send(self, data):
         """
